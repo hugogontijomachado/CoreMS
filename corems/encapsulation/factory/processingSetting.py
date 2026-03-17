@@ -745,7 +745,7 @@ class CompoundSearchSettings:
 
     ri_std: float = 3  # in standard deviation
 
-    ri_calibration_compound_names: List = dataclasses.field(default_factory=list)
+    ri_calibration_compound_names: list = dataclasses.field(default_factory=list)
 
     # calculates and export all spectral similarity methods
     exploratory_mode: bool = False
