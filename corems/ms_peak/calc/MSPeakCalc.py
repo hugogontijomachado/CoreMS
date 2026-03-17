@@ -3,6 +3,7 @@ __date__ = "Jun 04, 2019"
 
 import warnings
 
+import numpy as np
 import pyswarm
 from lmfit import models
 from numpy import (
@@ -19,8 +20,12 @@ from numpy import (
     rint,
     sqrt,
     square,
-    trapz,
 )
+
+try:
+    from numpy import trapezoid as _trapezoid
+except ImportError:  # pragma: no cover
+    from numpy import trapz as _trapezoid
 
 from corems.encapsulation.constant import Atoms
 from corems.encapsulation.factory.parameters import MSParameters
@@ -162,7 +167,7 @@ class MSPeakCalculation:
             if xx[0] > xx[-1]:
                 xx = flip(xx)
                 yy = flip(yy)
-            return float(trapz(yy, xx))
+            return float(_trapezoid(yy, xx))
 
         else:
             warnings.warn(

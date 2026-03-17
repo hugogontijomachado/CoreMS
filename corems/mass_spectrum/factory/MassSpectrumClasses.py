@@ -4,8 +4,13 @@ import numpy as np
 from lmfit.models import GaussianModel
 
 # from matplotlib import rcParamsDefault, rcParams
-from numpy import array, float64, histogram, trapz, where
+from numpy import array, float64, histogram, where
 from pandas import DataFrame
+
+try:
+    from numpy import trapezoid as _trapezoid
+except ImportError:  # pragma: no cover
+    from numpy import trapz as _trapezoid
 
 from corems.encapsulation.constant import Labels
 from corems.encapsulation.factory.parameters import MSParameters
@@ -645,7 +650,7 @@ class MassSpecBase(MassSpecCalc, KendrickGrouping):
     @property
     def tic(self):
         """Return the total ion current of the mass spectrum."""
-        return trapz(self.abundance_profile, self.mz_exp_profile)
+        return _trapezoid(self.abundance_profile, self.mz_exp_profile)
 
     def check_mspeaks_warning(self):
         """Check if the mass spectrum has MSpeaks objects.
