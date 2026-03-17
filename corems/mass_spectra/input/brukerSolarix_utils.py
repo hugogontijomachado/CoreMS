@@ -1,7 +1,7 @@
 """Utility functions for Bruker data processing."""
 
 from pathlib import Path
-from s3path import S3Path
+from corems.compat import S3Path
 
 
 def get_scan_attributes(scan_attr, imaging_info_attr) -> dict:

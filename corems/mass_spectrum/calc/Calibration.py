@@ -13,7 +13,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from s3path import S3Path
+from corems.compat import S3Path
 
 # import scipy modules for calibration
 from scipy.optimize import minimize

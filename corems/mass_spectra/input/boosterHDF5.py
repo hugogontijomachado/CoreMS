@@ -6,7 +6,7 @@ from pathlib import Path
 from io import BytesIO
 
 import h5py
-from s3path import S3Path
+from corems.compat import S3Path
 
 from corems.encapsulation.constant import Labels
 from corems.mass_spectrum.factory.MassSpectrumClasses import MassSpecProfile

@@ -6,7 +6,7 @@ from pathlib import Path
 from xml.dom import minidom
 
 from numpy import dtype, float32, float64, frombuffer, fromfile, fromstring, genfromtxt
-from s3path import S3Path
+from corems.compat import S3Path
 
 from corems.encapsulation.factory.parameters import default_parameters
 from corems.transient.factory.TransientClasses import Transient

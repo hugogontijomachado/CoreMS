@@ -6,7 +6,7 @@ from threading import Thread
 # from io import BytesIO
 
 from netCDF4 import Dataset
-from s3path import S3Path
+from corems.compat import S3Path
 
 from corems.encapsulation.constant import Labels
 from corems.encapsulation.factory.parameters import default_parameters

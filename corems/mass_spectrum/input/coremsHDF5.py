@@ -3,7 +3,7 @@ import json
 from pandas import DataFrame
 import h5py
 from io import BytesIO
-from s3path import S3Path
+from corems.compat import S3Path
 
 from corems.encapsulation.input.parameter_from_json import _set_dict_data_ms
 from corems.mass_spectrum.input.massList import ReadCoremsMasslist

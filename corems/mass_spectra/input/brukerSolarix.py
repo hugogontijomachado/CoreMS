@@ -3,7 +3,7 @@ __date__ = "Oct 29, 2019"
 
 from threading import Thread
 from pathlib import Path
-from s3path import S3Path
+from corems.compat import S3Path
 
 # import h5py
 

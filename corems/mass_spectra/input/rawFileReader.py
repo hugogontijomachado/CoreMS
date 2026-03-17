@@ -19,7 +19,7 @@ import os
 
 import clr
 import pandas as pd
-from s3path import S3Path
+from corems.compat import S3Path
 
 
 from typing import Any, Dict, List, Optional, Tuple
