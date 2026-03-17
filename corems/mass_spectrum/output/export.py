@@ -9,12 +9,14 @@ from threading import Thread
 import h5py
 import toml
 import numpy as np
-from numpy import NaN, empty
+from numpy import empty
 from pandas import DataFrame
 
 from corems.encapsulation.constant import Atoms, Labels #Labels is accessed in the eval() function
 from corems.encapsulation.output import parameter_to_dict
 from corems.mass_spectrum.factory.MassSpectrumClasses import MassSpecfromFreq
+
+NaN = np.nan
 
 
 class HighResMassSpecExport(Thread):
