@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   molformdb:
-    image: postgres
+    image: postgres:17
     restart: always
     volumes:
       - db-volume:/var/lib/postgresql/data

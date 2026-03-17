@@ -3,7 +3,7 @@ __date__ = "Jul 02, 2019"
 
 import dataclasses
 import os
-from typing import List, Dict
+import typing
 
 from corems.encapsulation.constant import Atoms, Labels
 
@@ -49,11 +49,12 @@ class TransientSetting:
 
     def __post_init__(self):
         # enforce datatype
+        hints = typing.get_type_hints(type(self))
         for field in dataclasses.fields(self):
             value = getattr(self, field.name)
-            if not isinstance(value, field.type):
-                value = field.type(value)
-                setattr(self, field.name, value)
+            ftype = hints.get(field.name)
+            if ftype is not None and isinstance(ftype, type) and not isinstance(value, ftype):
+                setattr(self, field.name, ftype(value))
 
 
 @dataclasses.dataclass
@@ -349,7 +350,7 @@ class LiquidChromatographSetting:
     redundant_feature_retain_n: int = 3
     remove_mass_features_by_peak_metrics: bool = False
     # note that this is a dictionary of dictionaries and set in __post_init__ instead of here
-    mass_feature_attribute_filter_dict: Dict = dataclasses.field(default_factory=dict)
+    mass_feature_attribute_filter_dict: dict = dataclasses.field(default_factory=dict)
 
     # Parameters used for 2D peak picking
     peak_picking_method: str = "persistent homology"
@@ -398,11 +399,12 @@ class LiquidChromatographSetting:
             }
         
         # enforce datatype
+        hints = typing.get_type_hints(type(self))
         for field in dataclasses.fields(self):
             value = getattr(self, field.name)
-            if not isinstance(value, field.type):
-                value = field.type(value)
-                setattr(self, field.name, value)
+            ftype = hints.get(field.name)
+            if ftype is not None and isinstance(ftype, type) and not isinstance(value, ftype):
+                setattr(self, field.name, ftype(value))
 
 
 @dataclasses.dataclass
@@ -513,11 +515,12 @@ class MassSpectrumSetting:
 
     def __post_init__(self):
         # enforce datatype
+        hints = typing.get_type_hints(type(self))
         for field in dataclasses.fields(self):
             value = getattr(self, field.name)
-            if not isinstance(value, field.type):
-                value = field.type(value)
-                setattr(self, field.name, value)
+            ftype = hints.get(field.name)
+            if ftype is not None and isinstance(ftype, type) and not isinstance(value, ftype):
+                setattr(self, field.name, ftype(value))
 
 
 @dataclasses.dataclass
@@ -558,7 +561,7 @@ class MassSpecPeakSetting:
         Default false.
     """
 
-    kendrick_base: Dict = dataclasses.field(default_factory=dict)
+    kendrick_base: dict = dataclasses.field(default_factory=dict)
 
     kendrick_rounding_method: str = "floor"  # 'floor', 'ceil' or 'round' are valid methods for calculating nominal kendrick mass
 
@@ -585,11 +588,12 @@ class MassSpecPeakSetting:
         if not self.kendrick_base:
             self.kendrick_base = {"C": 1, "H": 2}
         # enforce datatype
+        hints = typing.get_type_hints(type(self))
         for field in dataclasses.fields(self):
             value = getattr(self, field.name)
-            if not isinstance(value, field.type):
-                value = field.type(value)
-                setattr(self, field.name, value)
+            ftype = hints.get(field.name)
+            if ftype is not None and isinstance(ftype, type) and not isinstance(value, ftype):
+                setattr(self, field.name, ftype(value))
 
 
 @dataclasses.dataclass
@@ -694,11 +698,12 @@ class GasChromatographSetting:
 
     def __post_init__(self):
         # enforce datatype
+        hints = typing.get_type_hints(type(self))
         for field in dataclasses.fields(self):
             value = getattr(self, field.name)
-            if not isinstance(value, field.type):
-                value = field.type(value)
-                setattr(self, field.name, value)
+            ftype = hints.get(field.name)
+            if ftype is not None and isinstance(ftype, type) and not isinstance(value, ftype):
+                setattr(self, field.name, ftype(value))
 
 
 @dataclasses.dataclass
@@ -756,11 +761,12 @@ class CompoundSearchSettings:
             "sqlite:///db/pnnl_lowres_gcms_compounds.sqlite",
         )
 
+        hints = typing.get_type_hints(type(self))
         for field in dataclasses.fields(self):
             value = getattr(self, field.name)
-            if not isinstance(value, field.type):
-                value = field.type(value)
-                setattr(self, field.name, value)
+            ftype = hints.get(field.name)
+            if ftype is not None and isinstance(ftype, type) and not isinstance(value, ftype):
+                setattr(self, field.name, ftype(value))
 
         self.ri_calibration_compound_names = [
             "Methyl Caprylate",
@@ -1076,11 +1082,12 @@ class MolecularFormulaSearchSettings:
                 "COREMS_DATABASE_URL", "sqlite:///db/molformula.db"
             )
         # enforce datatype
+        hints = typing.get_type_hints(type(self))
         for field in dataclasses.fields(self):
             value = getattr(self, field.name)
-            if not isinstance(value, field.type):
-                value = field.type(value)
-                setattr(self, field.name, value)
+            ftype = hints.get(field.name)
+            if ftype is not None and isinstance(ftype, type) and not isinstance(value, ftype):
+                setattr(self, field.name, ftype(value))
 
         # enforce C and H if either do not exists
         if "C" not in self.usedAtoms.keys():

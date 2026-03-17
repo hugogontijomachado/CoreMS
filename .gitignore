@@ -88,3 +88,5 @@ ext_lib/
 *.egg*
 config.yaml
 *.token
+venv/*
+.venv*
